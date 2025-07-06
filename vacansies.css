@@ -1,575 +1,740 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
-        }
-        
-        :root {
-            --light-bg: #f0f2f5;
-            --light-text: #1a1a1a;
-            --light-accent: #d42a2a; /* Единый приятный красный */
-            --light-card: #ffffff;
-            --dark-bg: #121212;
-            --dark-text: #f0f0f0;
-            --dark-card: #1e1e1e;
-            --neon-red: #e32636; /* Единый приятный красный */
-            --neon-crimson: #d42a2a; /* Единый приятный красный */
-            --neon-graphite: #2a2a2a;
-            --soft-red: #ff6b6b; /* Мягкий красный для светлых элементов */
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: var(--light-text);
-            line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(227, 38, 54, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(227, 38, 54, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            gap: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Левая колонка - светлая тема */
-        .light-column {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border-left: 5px solid var(--light-accent);
-            animation: float 6s infinite ease-in-out;
-        }
-        
-        /* Правая колонка - тёмная тема */
-        .dark-column {
-            flex: 1;
-            background: linear-gradient(135deg, var(--neon-graphite), #1a1a1a);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border-right: 5px solid var(--neon-red);
-            animation: float 6s infinite ease-in-out;
-            animation-delay: 0.5s;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
-        
-        /* Стили для заголовков */
-        .column-header {
-            position: relative;
-            margin-bottom: 35px;
-            padding-bottom: 20px;
-            text-align: center;
-        }
-        
-        .column-header h1 {
-            font-size: 36px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-            padding: 0 25px;
-            z-index: 2;
-        }
-        
-        .light-column .column-header h1 {
-            color: var(--light-accent);
-            text-shadow: 0 0 10px rgba(212, 42, 42, 0.4);
-        }
-        
-        .dark-column .column-header h1 {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        .column-header::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
-            border-radius: 2px;
-            box-shadow: 0 0 15px rgba(227, 38, 54, 0.8);
-        }
-        
-        .column-header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 3px;
-            background: var(--neon-red);
-            border-radius: 2px;
-            box-shadow: 0 0 20px var(--neon-red);
-            filter: blur(3px);
-        }
-        
-        /* Карточки вакансий */
-        .vacancy-card {
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .light-column .vacancy-card {
-            background: var(--light-card);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(212, 42, 42, 0.2);
-        }
-        
-        .light-column .vacancy-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(212, 42, 42, 0.2);
-            border: 1px solid rgba(212, 42, 42, 0.5);
-        }
-        
-        .dark-column .vacancy-card {
-            background: rgba(40, 40, 40, 0.6);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(227, 38, 54, 0.3);
-        }
-        
-        .dark-column .vacancy-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(227, 38, 54, 0.3);
-            border: 1px solid rgba(227, 38, 54, 0.6);
-        }
-        
-        .vacancy-title {
-            font-size: 22px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .vacancy-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            border-radius: 2px;
-        }
-        
-        .light-column .vacancy-title {
-            color: var(--light-accent);
-        }
-        
-        .light-column .vacancy-title::after {
-            background: var(--light-accent);
-        }
-        
-        .dark-column .vacancy-title {
-            color: var(--soft-red);
-        }
-        
-        .dark-column .vacancy-title::after {
-            background: var(--soft-red);
-        }
-        
-        .vacancy-description {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        
-        .dark-column .vacancy-description {
-            color: #ddd;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: translateX(-100%);
-            transition: var(--transition);
-            z-index: -1;
-        }
-        
-        .btn:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .btn-primary {
-            background: var(--light-accent);
-            color: white;
-            box-shadow: 0 0 15px rgba(212, 42, 42, 0.5);
-        }
-        
-        .btn-primary:hover {
-            box-shadow: 0 0 25px rgba(212, 42, 42, 0.8);
-            transform: translateY(-3px);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--light-accent);
-            border: 2px solid var(--light-accent);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(212, 42, 42, 0.1);
-            box-shadow: 0 0 15px rgba(212, 42, 42, 0.3);
-        }
-        
-        .dark-column .btn-primary {
-            background: var(--neon-red);
-            box-shadow: 0 0 15px rgba(227, 38, 54, 0.7);
-        }
-        
-        .dark-column .btn-primary:hover {
-            box-shadow: 0 0 30px rgba(227, 38, 54, 1);
-        }
-        
-        .dark-column .btn-secondary {
-            color: var(--soft-red);
-            border: 2px solid var(--soft-red);
-        }
-        
-        .dark-column .btn-secondary:hover {
-            background: rgba(227, 38, 54, 0.1);
-            box-shadow: 0 0 15px rgba(227, 38, 54, 0.3);
-        }
-        
-        /* Боковые баннеры */
-        .banner-container {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 160px;
-            z-index: 100;
-        }
-        
-        .left-banner {
-            left: 20px;
-        }
-        
-        .right-banner {
-            right: 20px;
-        }
-        
-        .banner {
-            background: rgba(40, 40, 40, 0.95);
-            border: 2px solid var(--neon-red);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(227, 38, 54, 0.6);
-            backdrop-filter: blur(5px);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(227, 38, 54, 0.9);
-        }
-        
-        .banner h3 {
-            color: var(--soft-red);
-            margin-bottom: 15px;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
-        }
-        
-        .banner p {
-            color: #fff;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        
-        .banner-btn {
-            display: block;
-            background: var(--neon-red);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: var(--transition);
-            box-shadow: 0 0 10px rgba(227, 38, 54, 0.5);
-        }
-        
-        .banner-btn:hover {
-            background: #d42a2a;
-            box-shadow: 0 0 20px rgba(227, 38, 54, 0.8);
-            transform: scale(1.05);
-        }
-        
-        /* Секция Telegram канала */
-        .telegram-channel {
-            margin-top: 40px;
-            background: linear-gradient(135deg, rgba(227, 38, 54, 0.15) 0%, rgba(40, 40, 40, 0.9) 100%);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--neon-red);
-            box-shadow: 0 0 20px rgba(227, 38, 54, 0.4);
-        }
-        
-        .telegram-channel::before {
-            content: "";
-            position: absolute;
-            top: -50px;
-            right: -30px;
-            width: 150px;
-            height: 150px;
-            background: rgba(227, 38, 54, 0.1);
-            border-radius: 50%;
-        }
-        
-        .telegram-channel h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            position: relative;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-        }
-        
-        .telegram-channel p {
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #fff;
-            position: relative;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .btn-telegram {
-            display: inline-flex;
-            align-items: center;
-            padding: 14px 30px;
-            background: var(--neon-red);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            transition: var(--transition);
-            box-shadow: 0 0 15px rgba(227, 38, 54, 0.6);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-telegram:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(227, 38, 54, 0.9);
-        }
-        
-        .btn-telegram i {
-            font-size: 28px;
-            margin-right: 12px;
-            color: white;
-        }
-        
-        .fire-icon {
-            display: inline-block;
-            margin-left: 10px;
-            animation: fire 1.5s infinite alternate;
-        }
-        
-        @keyframes fire {
-            0% { transform: scale(1); text-shadow: 0 0 5px #e32636; }
-            100% { transform: scale(1.2); text-shadow: 0 0 15px #e32636, 0 0 25px #e32636; }
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 1200px) {
-            .banner-container {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .light-column, .dark-column {
-                animation: none;
-            }
-        }
-        
-        /* Анимация звезд */
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle var(--duration, 5s) infinite var(--delay, 0s);
-            z-index: -1;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
-        }
+/* Подключаем шрифт для элементов кода */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap');
 
-        /* Стили для блока Марцинковского */
-        .social-section {
-            background: rgba(40, 40, 40, 0.8);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(227, 38, 54, 0.4);
-            box-shadow: 0 0 15px rgba(227, 38, 54, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, rgba(227, 38, 54, 0.1), transparent 70%);
-            pointer-events: none;
-        }
-        
-        .social-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .social-header i {
-            font-size: 28px;
-            color: var(--soft-red);
-            margin-right: 15px;
-            text-shadow: 0 0 8px rgba(255, 107, 107, 0.7);
-        }
-        
-        .social-header h2 {
-            color: #fff;
-            font-size: 22px;
-            font-weight: 700;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-        
-        .social-section p {
-            color: #ddd;
-            margin-bottom: 20px;
-            font-size: 16px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .social-links {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            background: rgba(60, 60, 60, 0.7);
-            border-radius: 8px;
-            color: #f0f0f0;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-link:hover {
-            background: rgba(80, 80, 80, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 0 10px rgba(227, 38, 54, 0.4);
-            border-color: var(--soft-red);
-        }
-        
-        .social-link i {
-            font-size: 20px;
-            margin-right: 10px;
-            width: 24px;
-            text-align: center;
-            color: var(--soft-red);
-            text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
-        }
-        
-        .social-link span {
-            font-size: 14px;
-            font-weight: 500;
-        }
+:root {
+    --light-bg: #f0f2f5;
+    --light-text: #1a1a1a;
+    --light-accent: #d42a2a;
+    --light-card: #ffffff;
+    --dark-bg: #121212;
+    --dark-text: #f0f0f0;
+    --dark-card: #1e1e1e;
+    --neon-red: #e32636;
+    --neon-crimson: #d42a2a;
+    --neon-graphite: #2a2a2a;
+    --soft-red: #ff6b6b;
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --code-font: 'Source Code Pro', monospace;
+}
 
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: var(--light-text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+    padding-top: 36px; /* Для бегущей строки */
+}
 
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+            radial-gradient(circle at 20% 30%, rgba(227, 38, 54, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(227, 38, 54, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: -1;
+}
 
+/* БЕГУЩАЯ СТРОКА */
+.ticker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg,
+    rgba(20, 20, 30, 0.95) 0%,
+    rgba(40, 10, 20, 0.9) 50%,
+    rgba(20, 20, 30, 0.95) 100%);
+    color: white;
+    padding: 8px 0;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(227, 38, 54, 0.7);
+    border-bottom: 1px solid var(--neon-red);
+    font-size: 14px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    font-family: var(--code-font);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ticker-content {
+    display: inline-block;
+    white-space: nowrap;
+    position: absolute;
+    animation: ticker 25s linear infinite;
+    padding-right: 50px;
+}
+
+@keyframes ticker {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.ticker-content span {
+    margin-right: 30px;
+    text-shadow: 0 0 5px rgba(255, 107, 107, 0.8);
+}
+
+.ticker-icons {
+    display: inline-flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.ticker-icons a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-family: var(--code-font);
+    font-size: 13px;
+}
+
+.ticker-icons a:hover {
+    color: var(--soft-red);
+    transform: scale(1.1);
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.9);
+}
+
+.ticker-icons i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+/* КОНТЕЙНЕР */
+.container {
+    max-width: 1400px;
+    margin: 30px auto 0;
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* КОЛОНКИ */
+.light-column {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-left: 5px solid var(--light-accent);
+    animation: float 6s infinite ease-in-out;
+}
+
+.dark-column {
+    flex: 1;
+    background: linear-gradient(135deg, var(--neon-graphite), #1a1a1a);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-right: 5px solid var(--neon-red);
+    animation: float 6s infinite ease-in-out;
+    animation-delay: 0.5s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* ЗАГОЛОВКИ */
+.column-header {
+    position: relative;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.column-header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    padding: 0 25px;
+    z-index: 2;
+}
+
+.light-column .column-header h1 {
+    color: var(--light-accent);
+    text-shadow: 0 0 10px rgba(212, 42, 42, 0.4);
+}
+
+.dark-column .column-header h1 {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.column-header::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 15px rgba(227, 38, 54, 0.8);
+}
+
+.column-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 3px;
+    background: var(--neon-red);
+    border-radius: 2px;
+    box-shadow: 0 0 20px var(--neon-red);
+    filter: blur(3px);
+}
+
+/* КАРТОЧКИ ВАКАНСИЙ */
+.vacancy-card {
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.light-column .vacancy-card {
+    background: var(--light-card);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(212, 42, 42, 0.2);
+}
+
+.light-column .vacancy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212, 42, 42, 0.2);
+    border: 1px solid rgba(212, 42, 42, 0.5);
+}
+
+.dark-column .vacancy-card {
+    background: rgba(40, 40, 40, 0.6);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(227, 38, 54, 0.3);
+}
+
+.dark-column .vacancy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(227, 38, 54, 0.3);
+    border: 1px solid rgba(227, 38, 54, 0.6);
+}
+
+.vacancy-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.vacancy-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    border-radius: 2px;
+}
+
+.light-column .vacancy-title {
+    color: var(--light-accent);
+}
+
+.light-column .vacancy-title::after {
+    background: var(--light-accent);
+}
+
+.dark-column .vacancy-title {
+    color: var(--soft-red);
+}
+
+.dark-column .vacancy-title::after {
+    background: var(--soft-red);
+}
+
+.vacancy-description {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.dark-column .vacancy-description {
+    color: #ddd;
+}
+
+/* КНОПКИ */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    transform: translateX(100%);
+}
+
+.btn-primary {
+    background: var(--light-accent);
+    color: white;
+    box-shadow: 0 0 15px rgba(212, 42, 42, 0.5);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 25px rgba(212, 42, 42, 0.8);
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--light-accent);
+    border: 2px solid var(--light-accent);
+}
+
+.btn-secondary:hover {
+    background: rgba(212, 42, 42, 0.1);
+    box-shadow: 0 0 15px rgba(212, 42, 42, 0.3);
+}
+
+.dark-column .btn-primary {
+    background: var(--neon-red);
+    box-shadow: 0 0 15px rgba(227, 38, 54, 0.7);
+}
+
+.dark-column .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(227, 38, 54, 1);
+}
+
+.dark-column .btn-secondary {
+    color: var(--soft-red);
+    border: 2px solid var(--soft-red);
+}
+
+.dark-column .btn-secondary:hover {
+    background: rgba(227, 38, 54, 0.1);
+    box-shadow: 0 0 15px rgba(227, 38, 54, 0.3);
+}
+
+/* БОКОВЫЕ БАННЕРЫ (УЛУЧШЕННЫЕ) */
+.banner-container {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+.left-banner {
+    left: 20px;
+}
+
+.right-banner {
+    right: 20px;
+}
+
+.banner {
+    background: rgba(30, 15, 20, 0.85);
+    border: 1px solid var(--neon-red);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow:
+            0 0 20px rgba(227, 38, 54, 0.5),
+            inset 0 0 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    transition: var(--transition);
+    cursor: pointer;
+    font-family: var(--code-font);
+}
+
+.banner:hover {
+    transform: translateY(-5px);
+    box-shadow:
+            0 0 30px rgba(227, 38, 54, 0.8),
+            inset 0 0 10px rgba(255, 255, 255, 0.1);
+    background: rgba(40, 15, 25, 0.9);
+}
+
+.banner h3 {
+    color: var(--soft-red);
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+    font-family: var(--code-font);
+}
+
+.banner p {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-family: var(--code-font);
+}
+
+.banner-btn {
+    display: block;
+    background: rgba(227, 38, 54, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+    box-shadow: 0 0 10px rgba(227, 38, 54, 0.5);
+    font-family: var(--code-font);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.banner-btn:hover {
+    background: rgba(212, 42, 42, 0.9);
+    box-shadow: 0 0 20px rgba(227, 38, 54, 0.8);
+    transform: scale(1.05);
+}
+
+/* TELEGRAM БЛОК */
+.telegram-channel {
+    margin-top: 40px;
+    background: linear-gradient(135deg, rgba(227, 38, 54, 0.15) 0%, rgba(40, 40, 40, 0.9) 100%);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--neon-red);
+    box-shadow: 0 0 20px rgba(227, 38, 54, 0.4);
+}
+
+.telegram-channel::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -30px;
+    width: 150px;
+    height: 150px;
+    background: rgba(227, 38, 54, 0.1);
+    border-radius: 50%;
+}
+
+.telegram-channel h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    position: relative;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.telegram-channel p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #fff;
+    position: relative;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-telegram {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 30px;
+    background: var(--neon-red);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    transition: var(--transition);
+    box-shadow: 0 0 15px rgba(227, 38, 54, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-telegram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(227, 38, 54, 0.9);
+}
+
+.btn-telegram i {
+    font-size: 28px;
+    margin-right: 12px;
+    color: white;
+}
+
+.fire-icon {
+    display: inline-block;
+    margin-left: 10px;
+    animation: fire 1.5s infinite alternate;
+}
+
+@keyframes fire {
+    0% { transform: scale(1); text-shadow: 0 0 5px #e32636; }
+    100% { transform: scale(1.2); text-shadow: 0 0 15px #e32636, 0 0 25px #e32636; }
+}
+
+/* СОЦИАЛЬНЫЕ ССЫЛКИ В ФУТЕРЕ */
+footer {
+    position: relative;
+    width: 100%;
+    max-width: 1000px; /* Уже чем основной контейнер */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+footer .telegram-channel {
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: none;
+    background: rgba(30, 30, 40, 0.9);
+    box-shadow: 0 0 20px rgba(227, 38, 54, 0.3);
+}
+
+footer .vacancy-card {
+    background: rgba(25, 25, 35, 0.8);
+    border: 1px solid rgba(227, 38, 54, 0.4);
+}
+
+footer .social-links {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+footer .social-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(40, 40, 50, 0.7);
+    border-radius: 8px;
+    color: #f0f0f0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: var(--code-font);
+    font-size: 14px;
+}
+
+footer .social-link:hover {
+    background: rgba(60, 60, 70, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 0 10px rgba(227, 38, 54, 0.4);
+    border-color: var(--soft-red);
+}
+
+footer .social-link i {
+    font-size: 20px;
+    margin-right: 10px;
+    width: 24px;
+    text-align: center;
+    color: var(--soft-red);
+    text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+footer .social-link span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1200px) {
+    .banner-container {
+        display: none;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .light-column, .dark-column {
+        animation: none;
+    }
+
+    .ticker-content {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .light-column, .dark-column {
+        padding: 20px;
+    }
+
+    .column-header h1 {
+        font-size: 24px;
+    }
+
+    .vacancy-card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .vacancy-title {
+        font-size: 20px;
+    }
+
+    .vacancy-description {
+        font-size: 15px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .ticker {
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .ticker-content span {
+        display: inline;
+    }
+
+    .ticker-icons {
+        display: none;
+    }
+
+    footer {
+        max-width: 100%;
+    }
+
+    footer .social-links {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .column-header h1 {
+        font-size: 20px;
+        padding: 0 15px;
+    }
+
+    .vacancy-title {
+        font-size: 18px;
+    }
+
+    .vacancy-description {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 14px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .telegram-channel {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .ticker {
+        height: 32px;
+        padding: 5px 0;
+    }
+
+    .ticker-content {
+        animation: ticker 15s linear infinite;
+    }
+
+    footer .social-link {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .column-header h1 {
+        font-size: 18px;
+    }
+
+    .vacancy-title {
+        font-size: 16px;
+    }
+
+    .vacancy-description {
+        font-size: 13px;
+    }
+
+    .btn-telegram {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .ticker-content {
+        font-size: 11px;
+    }
+}
